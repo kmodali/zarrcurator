@@ -1,0 +1,99 @@
+# Store Layouts
+
+zarrcurator diagnoses, splits and archives zarr stores in all of these layouts, and
+creates Kerchunk references for the resulting tarballs:
+
+| Layout | Supported |
+| ------ | --------- |
+| zarr v2 and zarr v3 | yes |
+| Chunk key separators `.` and `/` | yes: v2 `0.1` / `0/1`, v3 `c.0.1` / `c/0/1`, and v3 with the `v2` key encoding |
+| Nested groups (e.g. written with `xarray.DataTree.to_zarr`) | yes |
+| Sharded arrays (zarr v3 `sharding_indexed`) | yes, see Sharding below |
+
+A store must open with xarray: every array needs dimension names (`_ARRAY_DIMENSIONS`
+in zarr v2, `dimension_names` in zarr v3). Stores written with xarray have them; stores
+written with plain zarr may not. `dispatchStoreToTarStores` checks this first (with
+`checkStoreOpensWithXarray`) and raises a `ValueError` before diagnosing, splitting or
+archiving a store xarray cannot open.
+
+## Nested groups
+
+In a store with nested groups, each array is handled by its path from the store root,
+e.g. `atmos/ocean/salinity`.
+
+- **Diagnosis** records the size of each array by its path, and the metadata files of each
+  group, e.g. `atmos/.zgroup` (v2) or `atmos/zarr.json` (v3).
+- **`findMissingChunksInStore`** checks every array in the store, including those in nested
+  groups. The `.check` report is keyed by the array path, e.g. `/atmos/ocean/salinity`.
+- **Splitting**: a group whose arrays together fit the target size goes into one tarball. A
+  larger group is split into its arrays and its sub groups, which are handled the same way;
+  an array larger than the target is split into tarballs of its chunks.
+- **Coordinates**: each tarball gets the coordinate variables of its arrays. A group can use
+  the coordinates of the groups above it, as in an xarray DataTree, so each coordinate is looked
+  up in the array's own group first, then in its parent groups up to the store root.
+- **Tarballs** contain the metadata of every group from the store root down to their arrays,
+  so each tarball opens with `xarray.open_datatree`.
+
+## Sharding
+
+In a sharded array each shard is one file, so zarrcurator handles shards like chunks:
+
+- `findMissingChunksInStore` checks the shards (`expected_chunks` counts shards). A shard of
+  zero size is reported under `zero_size`; zarr reads an empty shard as not written, so unlike a
+  zero-size chunk it is not also reported as `corrupt`.
+- Arrays larger than the target size are split into tarballs of whole shards. A shard cannot be
+  split, so a single shard larger than the target size makes a tarball larger than the target.
+- The Kerchunk references point to the inner chunks: the index of each shard is read from the
+  tarball (at the end or the start of the shard, its `crc32c` checksum verified) and each inner
+  chunk becomes a reference to its byte range. A corrupted shard index raises a `ValueError`.
+
+Nested sharding, a codec applied after `sharding_indexed`, and shard index codecs other than
+`bytes` with an optional `crc32c` are not supported and raise a `ValueError`.
+
+## Kerchunk references
+
+`createKerchunkReferenceFileForTar` writes the references of one tarball;
+`convertKerchunkReferenceFilesOfZarrStoreToParquet` merges the references of all tarballs of a
+store (`<store>_*_Offset_kerchunk.json`) into one parquet reference of the whole store
+(`<store>.parq`).
+
+- The tarballs of a store are parts of it, so their references are merged: each chunk of a data
+  variable is in one tarball; metadata and coordinate variables are in several and are kept once,
+  after checking that their content is the same. A key with a different content in two tarballs
+  raises a `ValueError`.
+- The references are written in the zarr v2 layout. For zarr v3 stores the metadata is translated
+  to zarr v2 and the chunks are referenced unchanged, which works for the `bytes` codec followed by
+  at most one compressor (`zstd`, `gzip`, `blosc` or a `numcodecs.*` codec). The reopened data is
+  zarr v2.
+- The references of different stores are not combined: tarballs are not concatenated along `time`.
+
+Opening the references of a store without nested groups:
+
+```python
+import fsspec
+import xarray as xr
+
+mapper = fsspec.get_mapper(
+    "reference://", fo="work/mystore.parq", remote_protocol="file"
+)
+ds = xr.open_dataset(mapper, engine="zarr", consolidated=False, zarr_format=2)
+```
+
+Opening the references of a store with nested groups needs `consolidated=True`, as fsspec's
+listing of parquet references does not find nested groups:
+
+```python
+tree = xr.open_datatree(
+    "reference://",
+    engine="zarr",
+    consolidated=True,
+    zarr_format=2,
+    storage_options={"fo": "work/mystore.parq", "remote_protocol": "file"},
+)
+```
+
+## Synthetic test stores
+
+`python -m zarrcurator.synthetic_store` generates small stores in each of these layouts, with
+anomalies injected for the diagnostics, see the README. The fixture in
+`tests/data/synthetic_experiment` holds one store per layout and frequency.

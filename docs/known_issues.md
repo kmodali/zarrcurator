@@ -1,0 +1,38 @@
+# Known Issues and Limitations
+
+## Known issues
+
+- **Target sizes below 1 GiB fail for large arrays.** `Dispatcher.createTarForChunk` computes the
+  number of tarballs in whole GiB (`divmod(int(size), int(targetSize))`), so a target size below
+  1 GiB raises `ZeroDivisionError` when an array exceeds the target size.
+- **A metadata file larger than the target size fails.** The distributor treats it like a large
+  array and passes it to `createTarForChunk`, which expects a directory. This can happen with the
+  consolidated metadata (`.zmetadata`, or the root `zarr.json`) of a large store with many groups.
+- **Unclosed reference files.** `convertKerchunkReferenceFilesOfZarrStoreToParquet` writes and reads
+  the `*_Offset_kerchunk.json.copy` files without closing them. This works because CPython closes
+  them immediately, and shows as `ResourceWarning` in the tests.
+
+## Limitations
+
+- **Kerchunk references are zarr v2.** zarr v3 stores are referenced through a translation of their
+  metadata to zarr v2; codecs without a zarr v2 equivalent (`transpose`, chained compressors) raise
+  a `ValueError`. See [Store Layouts](store_layouts.md).
+- **Fill values of translated zarr v3 arrays.** xarray keeps the fill value of zarr v3 arrays in the
+  `_FillValue` attribute. An array without it but with a non-zero zarr fill value keeps that fill
+  value in the zarr v2 references, where xarray treats it as missing data; a warning is logged.
+- **Nested groups need consolidated metadata.** Parquet references of a store with nested groups
+  must be opened with `consolidated=True`: fsspec's listing of parquet references does not find
+  nested groups.
+- **Shards are not split.** A single shard larger than the target size makes a tarball larger than
+  the target size.
+- **Unsupported sharding.** Nested sharding, a codec after `sharding_indexed` and shard index codecs
+  other than `bytes` with an optional `crc32c` raise a `ValueError`.
+
+## Worked around
+
+- **Missing chunks in parquet references (fsspec).** When fsspec stores the URLs of an array's
+  references as a pandas categorical (by default when an array has at least 10 references per URL,
+  i.e. nearly every array of a tarball), a chunk missing from the references reads back as `[nan]`
+  instead of as missing. zarr does not write chunks that hold only the fill value, so this gave
+  wrong data. zarrcurator writes the parquet references without categoricals
+  (`categorical_threshold=sys.maxsize`).

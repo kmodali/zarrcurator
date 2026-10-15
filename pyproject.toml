@@ -1,0 +1,99 @@
+[project]
+name = "zarrcurator"
+version = "1.0.0b1"
+description = "Analyze Zarr stores for completeness, sizing, and archival distribution workflows"
+readme = "README.md"
+authors = [
+    { name = "Kameswarrao Modali", email = "modali@dkrz.de" }
+]
+requires-python = ">=3.12"
+keywords = ["zarr", "analysis", "data-archiving", "cloud-storage", "scientific-data"]
+dependencies = [
+    "cftime>=1.6.6",
+    "fastparquet>=2026.9.0",
+    "fsspec>=2026.2.0",
+    "kerchunk>=0.2.10",
+    "matplotlib>=3.10.8",
+    "plotly>=6.6.0",
+    "pyslk>=2.3.0",
+    "rich>=14.3.3",
+    "s3fs>=2026.9.0",
+    "tqdm>=4.70.1",
+    "ujson>=6.0.0",
+    "validators>=0.35.0",
+    "xarray>=2026.7.0",
+    "zarr>=3.4.1",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Archiving",
+]
+license = "GPL-3.0-only"
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.4.0",
+    "codespell>=2.4.1",
+    "mypy>=1.19.1",
+    "pre-commit>=4.3.0",
+    "pytest>=9.0.2",
+    "ruff>=0.15.4",
+    "twine>=6.2.0",
+]
+docs = [
+    "sphinx>=9.1.0",
+    "sphinx-rtd-theme>=3.1.0",
+    "myst-parser>=5.1.0",
+    "rst2pdf>=0.105",
+]
+
+[build-system]
+requires = ["uv_build>=0.10.8,<0.11.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "build>=1.4.0",
+    "codespell>=2.4.1",
+    "mypy>=1.19.1",
+    "pre-commit>=4.3.0",
+    "pytest>=9.0.2",
+    "ruff>=0.15.4",
+    "twine>=6.2.0",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/kmodali/zarrcurator"
+Issues = "https://github.com/kmodali/zarrcurator/issues"
+Documentation = "https://zarrcurator.readthedocs.io"
+Changelog = "https://github.com/kmodali/zarrcurator/blob/main/CHANGELOG.md"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/zarrcurator"]
+ignore_missing_imports = true
+show_error_codes = true
+warn_unused_ignores = true
+
+[tool.codespell]
+skip = ".git,dist,uv.lock,.pytest_cache"
+quiet-level = 2
+ignore-words-list = "vas,fo"

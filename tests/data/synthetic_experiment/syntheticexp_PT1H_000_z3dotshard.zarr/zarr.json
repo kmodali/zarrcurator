@@ -1,0 +1,11 @@
+{
+  "attributes": {
+    "frequency": "PT1H",
+    "zoom": 1,
+    "generator": "zarrcurator.synthetic_store",
+    "synthetic": true,
+    "zarr_format": 3
+  },
+  "zarr_format": 3,
+  "node_type": "group"
+}

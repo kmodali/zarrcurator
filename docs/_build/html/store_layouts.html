@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store Layouts &mdash; zarrcurator documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Known Issues and Limitations" href="known_issues.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            zarrcurator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Store Layouts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nested-groups">Nested groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sharding">Sharding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kerchunk-references">Kerchunk references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#synthetic-test-stores">Synthetic test stores</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="known_issues.html">Known Issues and Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_DOCSTRINGS.html">zarrcurator API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">zarrcurator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Store Layouts</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/store_layouts.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="store-layouts">
+<h1>Store Layouts<a class="headerlink" href="#store-layouts" title="Link to this heading"></a></h1>
+<p>zarrcurator diagnoses, splits and archives zarr stores in all of these layouts, and
+creates Kerchunk references for the resulting tarballs:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Layout</p></th>
+<th class="head"><p>Supported</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>zarr v2 and zarr v3</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Chunk key separators <code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code></p></td>
+<td><p>yes: v2 <code class="docutils literal notranslate"><span class="pre">0.1</span></code> / <code class="docutils literal notranslate"><span class="pre">0/1</span></code>, v3 <code class="docutils literal notranslate"><span class="pre">c.0.1</span></code> / <code class="docutils literal notranslate"><span class="pre">c/0/1</span></code>, and v3 with the <code class="docutils literal notranslate"><span class="pre">v2</span></code> key encoding</p></td>
+</tr>
+<tr class="row-even"><td><p>Nested groups (e.g. written with <code class="docutils literal notranslate"><span class="pre">xarray.DataTree.to_zarr</span></code>)</p></td>
+<td><p>yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sharded arrays (zarr v3 <code class="docutils literal notranslate"><span class="pre">sharding_indexed</span></code>)</p></td>
+<td><p>yes, see Sharding below</p></td>
+</tr>
+</tbody>
+</table>
+<p>A store must open with xarray: every array needs dimension names (<code class="docutils literal notranslate"><span class="pre">_ARRAY_DIMENSIONS</span></code>
+in zarr v2, <code class="docutils literal notranslate"><span class="pre">dimension_names</span></code> in zarr v3). Stores written with xarray have them; stores
+written with plain zarr may not. <code class="docutils literal notranslate"><span class="pre">dispatchStoreToTarStores</span></code> checks this first (with
+<code class="docutils literal notranslate"><span class="pre">checkStoreOpensWithXarray</span></code>) and raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> before diagnosing, splitting or
+archiving a store xarray cannot open.</p>
+<section id="nested-groups">
+<h2>Nested groups<a class="headerlink" href="#nested-groups" title="Link to this heading"></a></h2>
+<p>In a store with nested groups, each array is handled by its path from the store root,
+e.g. <code class="docutils literal notranslate"><span class="pre">atmos/ocean/salinity</span></code>.</p>
+<ul class="simple">
+<li><p><strong>Diagnosis</strong> records the size of each array by its path, and the metadata files of each
+group, e.g. <code class="docutils literal notranslate"><span class="pre">atmos/.zgroup</span></code> (v2) or <code class="docutils literal notranslate"><span class="pre">atmos/zarr.json</span></code> (v3).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">findMissingChunksInStore</span></code></strong> checks every array in the store, including those in nested
+groups. The <code class="docutils literal notranslate"><span class="pre">.check</span></code> report is keyed by the array path, e.g. <code class="docutils literal notranslate"><span class="pre">/atmos/ocean/salinity</span></code>.</p></li>
+<li><p><strong>Splitting</strong>: a group whose arrays together fit the target size goes into one tarball. A
+larger group is split into its arrays and its sub groups, which are handled the same way;
+an array larger than the target is split into tarballs of its chunks.</p></li>
+<li><p><strong>Coordinates</strong>: each tarball gets the coordinate variables of its arrays. A group can use
+the coordinates of the groups above it, as in an xarray DataTree, so each coordinate is looked
+up in the array’s own group first, then in its parent groups up to the store root.</p></li>
+<li><p><strong>Tarballs</strong> contain the metadata of every group from the store root down to their arrays,
+so each tarball opens with <code class="docutils literal notranslate"><span class="pre">xarray.open_datatree</span></code>.</p></li>
+</ul>
+</section>
+<section id="sharding">
+<h2>Sharding<a class="headerlink" href="#sharding" title="Link to this heading"></a></h2>
+<p>In a sharded array each shard is one file, so zarrcurator handles shards like chunks:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">findMissingChunksInStore</span></code> checks the shards (<code class="docutils literal notranslate"><span class="pre">expected_chunks</span></code> counts shards). A shard of
+zero size is reported under <code class="docutils literal notranslate"><span class="pre">zero_size</span></code>; zarr reads an empty shard as not written, so unlike a
+zero-size chunk it is not also reported as <code class="docutils literal notranslate"><span class="pre">corrupt</span></code>.</p></li>
+<li><p>Arrays larger than the target size are split into tarballs of whole shards. A shard cannot be
+split, so a single shard larger than the target size makes a tarball larger than the target.</p></li>
+<li><p>The Kerchunk references point to the inner chunks: the index of each shard is read from the
+tarball (at the end or the start of the shard, its <code class="docutils literal notranslate"><span class="pre">crc32c</span></code> checksum verified) and each inner
+chunk becomes a reference to its byte range. A corrupted shard index raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p></li>
+</ul>
+<p>Nested sharding, a codec applied after <code class="docutils literal notranslate"><span class="pre">sharding_indexed</span></code>, and shard index codecs other than
+<code class="docutils literal notranslate"><span class="pre">bytes</span></code> with an optional <code class="docutils literal notranslate"><span class="pre">crc32c</span></code> are not supported and raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
+</section>
+<section id="kerchunk-references">
+<h2>Kerchunk references<a class="headerlink" href="#kerchunk-references" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">createKerchunkReferenceFileForTar</span></code> writes the references of one tarball;
+<code class="docutils literal notranslate"><span class="pre">convertKerchunkReferenceFilesOfZarrStoreToParquet</span></code> merges the references of all tarballs of a
+store (<code class="docutils literal notranslate"><span class="pre">&lt;store&gt;_*_Offset_kerchunk.json</span></code>) into one parquet reference of the whole store
+(<code class="docutils literal notranslate"><span class="pre">&lt;store&gt;.parq</span></code>).</p>
+<ul class="simple">
+<li><p>The tarballs of a store are parts of it, so their references are merged: each chunk of a data
+variable is in one tarball; metadata and coordinate variables are in several and are kept once,
+after checking that their content is the same. A key with a different content in two tarballs
+raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p></li>
+<li><p>The references are written in the zarr v2 layout. For zarr v3 stores the metadata is translated
+to zarr v2 and the chunks are referenced unchanged, which works for the <code class="docutils literal notranslate"><span class="pre">bytes</span></code> codec followed by
+at most one compressor (<code class="docutils literal notranslate"><span class="pre">zstd</span></code>, <code class="docutils literal notranslate"><span class="pre">gzip</span></code>, <code class="docutils literal notranslate"><span class="pre">blosc</span></code> or a <code class="docutils literal notranslate"><span class="pre">numcodecs.*</span></code> codec). The reopened data is
+zarr v2.</p></li>
+<li><p>The references of different stores are not combined: tarballs are not concatenated along <code class="docutils literal notranslate"><span class="pre">time</span></code>.</p></li>
+</ul>
+<p>Opening the references of a store without nested groups:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">fsspec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="n">mapper</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span>
+    <span class="s2">&quot;reference://&quot;</span><span class="p">,</span> <span class="n">fo</span><span class="o">=</span><span class="s2">&quot;work/mystore.parq&quot;</span><span class="p">,</span> <span class="n">remote_protocol</span><span class="o">=</span><span class="s2">&quot;file&quot;</span>
+<span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span> <span class="n">consolidated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zarr_format</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Opening the references of a store with nested groups needs <code class="docutils literal notranslate"><span class="pre">consolidated=True</span></code>, as fsspec’s
+listing of parquet references does not find nested groups:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_datatree</span><span class="p">(</span>
+    <span class="s2">&quot;reference://&quot;</span><span class="p">,</span>
+    <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;zarr&quot;</span><span class="p">,</span>
+    <span class="n">consolidated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">zarr_format</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">storage_options</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fo&quot;</span><span class="p">:</span> <span class="s2">&quot;work/mystore.parq&quot;</span><span class="p">,</span> <span class="s2">&quot;remote_protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;file&quot;</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="synthetic-test-stores">
+<h2>Synthetic test stores<a class="headerlink" href="#synthetic-test-stores" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">zarrcurator.synthetic_store</span></code> generates small stores in each of these layouts, with
+anomalies injected for the diagnostics, see the README. The fixture in
+<code class="docutils literal notranslate"><span class="pre">tests/data/synthetic_experiment</span></code> holds one store per layout and frequency.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="known_issues.html" class="btn btn-neutral float-right" title="Known Issues and Limitations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Kameswarrao Modali.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1013 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zarrcurator API Documentation &mdash; zarrcurator documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Known Issues and Limitations" href="known_issues.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            zarrcurator
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="store_layouts.html">Store Layouts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known_issues.html">Known Issues and Limitations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">zarrcurator API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-init">Module: <strong>init</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enable-logging">enable_logging()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-benchmark">Module: benchmark</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-synthetic-store">create_synthetic_store()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#benchmark-diagnose">benchmark_diagnose()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#benchmark-dispatch">benchmark_dispatch()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parse-args">parse_args()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#main">main()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#classes">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#benchdistributor">_BenchDistributor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-chunkkeys">Module: chunkkeys</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parsechunkkey">parseChunkKey()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cli">Module: cli</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configure-logging">configure_logging()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">main()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-config">Module: config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configvars">configVars</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-core">Module: core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hello">hello()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hellofrom">helloFrom()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-diagnoser">Module: diagnoser</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diagnoser">Diagnoser</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-dispatcher">Module: dispatcher</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dispatcher">Dispatcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-displayer">Module: displayer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#displayer">Displayer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-distributor">Module: distributor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#distributor">Distributor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-oceanvarsyaml">Module: oceanVarsYAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-storetree">Module: storetree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#iszarrgroupdir">isZarrGroupDir()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#listarraypaths">listArrayPaths()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#groupancestors">groupAncestors()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-subgroup">Module: subgroup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subgroup-to-dict">subGroup_to_dict()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#subgroup-from-dict">subGroup_from_dict()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subgroup">SubGroup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-synthetic-store">Module: synthetic_store</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#store-variant-tag">store_variant_tag()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-synthetic-experiment">create_synthetic_experiment()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-smoke-pipeline">run_smoke_pipeline()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">parse_args()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">main()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-utils">Module: utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">usage()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saveconfigtofile">saveConfigToFile()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loadconfigfromfile">loadConfigFromFile()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setobjectstorecredentials">setObjectStoreCredentials()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updatestoretoconfig">updateStoretoConfig()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#findmissingchunksinstore">findMissingChunksInStore()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initialize">initialize()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnose">diagnose()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diagnosestore">diagnoseStore()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#display">display()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-in-jupyter">running_in_jupyter()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#displaystoresunburst">displayStoreSunburst()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#displayzarrstorevariables">displayZarrStoreVariables()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distribute">distribute()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distributestoretosubstores">distributeStoreToSubStores()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#checkstoreopenswithxarray">checkStoreOpensWithXarray()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dispatchstoretotarstores">dispatchStoreToTarStores()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dispatch">dispatch()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#createkerchunkreferencefilefortar">createKerchunkReferenceFileForTar()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mergekerchunkreferences">mergeKerchunkReferences()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convertkerchunkreferencefilesofzarrstoretoparquet">convertKerchunkReferenceFilesOfZarrStoreToParquet()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updatearchbasepath">updateArchBasePath()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updatetartotapemapper">updateTarToTapeMapper()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maptapeidstofrequencysubgroupdict">mapTapeIDsToFrequencySubGroupDict()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#displayzarrstorestartapes">displayZarrStoresTarTapes()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#displayzarrstorevartartapes">displayZarrStoreVarTarTapes()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-zarrmetadata">Module: zarrmetadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#v3codecstov2">v3CodecsToV2()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#v3metadatatov2">v3MetadataToV2()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#v3shardinglayout">v3ShardingLayout()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shardchunkreferences">shardChunkReferences()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#v3chunkkeytov2">v3ChunkKeyToV2()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">zarrcurator</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">zarrcurator API Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/API_DOCSTRINGS.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zarrcurator-api-documentation">
+<h1>zarrcurator API Documentation<a class="headerlink" href="#zarrcurator-api-documentation" title="Link to this heading"></a></h1>
+<p>Generated from source docstrings.</p>
+<p>Generated on: 2026-09-30</p>
+<section id="module-init">
+<h2>Module: <strong>init</strong><a class="headerlink" href="#module-init" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/<strong>init</strong>.py</p>
+<p>No docstring provided.</p>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<section id="enable-logging">
+<h4>enable_logging()<a class="headerlink" href="#enable-logging" title="Link to this heading"></a></h4>
+<p>Enable zarrcurator logging for notebooks and library usage.</p>
+<p>This configures both console logging and a timestamped log file,
+using the same behavior as the CLI.</p>
+</section>
+</section>
+</section>
+<section id="module-benchmark">
+<h2>Module: benchmark<a class="headerlink" href="#module-benchmark" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/benchmark.py</p>
+<p>Micro-benchmark harness for zarrcurator.</p>
+<p>Run examples:
+python -m zarrcurator.benchmark –synthetic
+python -m zarrcurator.benchmark –store-path /path/to/store.zarr –phase diagnose
+python -m zarrcurator.benchmark –synthetic –phase both –log-level INFO</p>
+<section id="id1">
+<h3>Functions<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<section id="create-synthetic-store">
+<h4>create_synthetic_store()<a class="headerlink" href="#create-synthetic-store" title="Link to this heading"></a></h4>
+<p>Create a lightweight local zarr-like directory tree for benchmarking I/O paths.</p>
+</section>
+<section id="benchmark-diagnose">
+<h4>benchmark_diagnose()<a class="headerlink" href="#benchmark-diagnose" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+<section id="benchmark-dispatch">
+<h4>benchmark_dispatch()<a class="headerlink" href="#benchmark-dispatch" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+<section id="parse-args">
+<h4>parse_args()<a class="headerlink" href="#parse-args" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+<section id="main">
+<h4>main()<a class="headerlink" href="#main" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+</section>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h3>
+<section id="benchdistributor">
+<h4>_BenchDistributor<a class="headerlink" href="#benchdistributor" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+</section>
+</section>
+<section id="module-chunkkeys">
+<h2>Module: chunkkeys<a class="headerlink" href="#module-chunkkeys" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/chunkkeys.py</p>
+<p>This module contains helpers for parsing zarr chunk keys.</p>
+<section id="id2">
+<h3>Functions<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<section id="parsechunkkey">
+<h4>parseChunkKey()<a class="headerlink" href="#parsechunkkey" title="Link to this heading"></a></h4>
+<p>Parse the chunk coordinates from a chunk key relative to its variable.</p>
+<p>Supports zarr v2 keys separated by ‘.’ (0.1) or ‘/’ (0/1), and zarr v3 keys
+with the ‘c’ prefix separated by ‘/’ (c/0/1) or ‘.’ (c.0.1).</p>
+<p>Args:
+str: Chunk key relative to the variable directory.
+Returns:
+tuple: Chunk coordinates, or None if the key is not a chunk key.</p>
+</section>
+</section>
+</section>
+<section id="module-cli">
+<h2>Module: cli<a class="headerlink" href="#module-cli" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/cli.py</p>
+<p>No docstring provided.</p>
+<section id="id3">
+<h3>Functions<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="configure-logging">
+<h4>configure_logging()<a class="headerlink" href="#configure-logging" title="Link to this heading"></a></h4>
+<p>Configure root logging for zarrcurator CLI usage.</p>
+<p>Priority:</p>
+<ol class="arabic simple">
+<li><p>CLI –log-level value</p></li>
+<li><p>ZARRCURATOR_LOG_LEVEL environment variable</p></li>
+<li><p>INFO default</p></li>
+</ol>
+</section>
+<section id="id4">
+<h4>main()<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+</section>
+</section>
+<section id="module-config">
+<h2>Module: config<a class="headerlink" href="#module-config" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/config.py</p>
+<p>This module contains the configuration variables to handle the various features of the zarrcurator tool.
+The configuration variables consists of the various path, the flag to handle the mode of operation viz.,
+interactive or batch mode.</p>
+<section id="id5">
+<h3>Classes<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="configvars">
+<h4>configVars<a class="headerlink" href="#configvars" title="Link to this heading"></a></h4>
+<p>Config class to hold the configuration variables to be used across the modules in the package.</p>
+<section id="methods-of-configvars">
+<h5>Methods of configVars<a class="headerlink" href="#methods-of-configvars" title="Link to this heading"></a></h5>
+<ul class="simple">
+<li><p>getZarrStorePath(): Get the path of the zarr stores.  To get the directory under which the zarr stores, for each healpix and frequency combination exist.   Args:         None. Returns:         path: Path to zarr stores.</p></li>
+<li><p>setZarrStorePath(): Set the path of the zarr stores.  To set the directory under which the zarr stores, for each healpix and frequency combination exist.   Args:         path: Path to zarr stores. Returns:         None.</p></li>
+<li><p>getFileSystemObj(): Get the file system object.  To get the file system object, so that it can be used in other classes of the zarrcurator viz., diagnoser.  Args:         None. Returns:         object[class FileSystem]: File system object.</p></li>
+<li><p>setFileSystemObj(): Set the file system object.  To set the file system object, so that it can be used in other classes of the zarrcurator viz., diagnoser.  Args:         None. Returns:         None.</p></li>
+<li><p>parse_object_store_url(): Parse an object-store HTTP URL into: - endpoint - bucket - object key - s3 uri</p></li>
+<li><p>getWorkingDir(): Get the path of the working directory.  To get the directory under which the output produced by zarrcurator will be stored.   Args:         None. Returns:         path: Path to working directory.</p></li>
+<li><p>setWorkingDir(): Set the path of the working directory.  To set the directory under which the output produced by zarrcurator will be stored.   Args:         path: Path to working directory. Returns:         None.</p></li>
+<li><p>getArchBasePath(): Get the path of the directory on HSM.  To get the location of the directory on HSM under which the tarballs prouced by zarrcurator tool will be stored.  Args:         None. Returns:         path: Path to base directory on HSM.</p></li>
+<li><p>setArchBasePath(): Set the path of the directory on HSM.  To set the location of the directory on HSM under which the tarballs prouced by zarrcurator tool will be stored.  Args:         path: Path to base directory on HSM. Returns:         None.</p></li>
+<li><p>getJsonFile(): Get the name of the JSON file.  To get the name of the output JSON file produced by zarrcurator.   Args:         None. Returns:         str: Name of the JSON file.</p></li>
+<li><p>setJsonFile(): Set the name of the JSON file.  To set the name of the output JSON file produced by zarrcurator.   Args:         str: Name of the JSON file. Returns:         None.</p></li>
+<li><p>getTargetSize(): Get the target size of the tarball.  To get the target size of the tar ball keeping in view the constraints of the HSM system, as of now 200 GB.  Args:         None. Returns:         int: Target size of the tarball.</p></li>
+<li><p>setTargetSize(): Set the target size of the tarball.  To set the target size of the tar ball keeping in view the constraints of the HSM system, as of now 200 GB.  Args:         int: Target size of the tarball. Returns:         None.</p></li>
+<li><p>getBatchMode(): Get the mode of operation of the zarrcurator.  To get the mode of operation of the zarrcurator viz., interactive or batch mode.  Args:         None. Returns:         bool: mode of operation of the zarrcurator.</p></li>
+<li><p>setBatchMode(): Set the mode of operation of the zarrcurator.  To set the mode of operation of the zarrcurator viz., interactive or batch mode.  Args:         bool: mode of operation of the zarrcurator. Returns:         None.</p></li>
+<li><p>getDebugMode(): Get the debug mode of operation of the zarrcurator.  To get the debug mode of operation of the zarrcurator.  Args:         None. Returns:         bool: Debug mode of operation of the zarrcurator.</p></li>
+<li><p>setDebugMode(): Set the debug mode of operation of the zarrcurator.  To set the debug mode of operation of the zarrcurator.  Args:         bool: Debug mode of operation of the zarrcurator. Returns:         None.</p></li>
+<li><p>getPackDiscontinuousData(): Get the flag for packing the discontinuous data.  To get flag to pack the data even if the chunks are missing.  Args:         None. Returns:         bool: Flag to indicate the packing of missing chunks.</p></li>
+<li><p>setPackDiscontinuousData(): Set the flag for packing the discontinuous data.  To set the flag to pack the data even if the chunks are missing .  Args:         bool: Flag to indicate the packing of missing chunks. Returns:         None.</p></li>
+<li><p>getaccessKey(): Get the accessKey for accessing the object store.  To get the access key environment variable name.  Args:         None. Returns:         str: Name of the environment variable.</p></li>
+<li><p>setaccessKey(): Set the accessKey for accessing the object store.  To set the access key environment variable name.  Args:         str: Name of the environment variable. Returns:         None.</p></li>
+<li><p>getsecretKey(): Get the secretKey for accessing the object store.  To get the secret key environment variable name.  Args:         None. Returns:         str: Name of the environment variable.</p></li>
+<li><p>setsecretKey(): Set the secretKey for accessing the object store.  To set the secret key environment variable name.  Args:         str: Name of the environment variable. Returns:         None.</p></li>
+<li><p>getDistributorObj(): Get the distributor object.  To get the distributor object, so that it can be used in other classes of the zarrcurator viz., dispatcher.  Args:         None. Returns:         object[class Distributor]: Distributor object.</p></li>
+<li><p>setDistributorObj(): Set the distributor object.  To set the distributor object, so that it can be used in other classes of the zarrcurator viz., dispatcher.  Args:         object[class Distributor]: Distributor object. Returns:         None.</p></li>
+<li><p>getDiagnoserObj(): Get the diagnoser object.  To get the diagnoser object, so that it can be used in other classes of the zarrcurator viz., displayer.  Args:         None. Returns:         object[class Diagnoser]: Diagnoser object.</p></li>
+<li><p>setDiagnoserObj(): Set the diagnoser object.  To set the diagnoser object, so that it can be used in other classes of the zarrcurator viz., displayer.  Args:         object[class Diagnoser]: Diagnoser object. Returns:         None.</p></li>
+<li><p>getDispatcherObj(): Get the dispatcher object.  To get the dispatcher object, so that it can be used in other parts of the zarrcurator viz., utils.  Args:         None. Returns:         object[class Dispatcher]: Dispatcher object.</p></li>
+<li><p>setDispatcherObj(): Set the dispatcher object.  To set the dispatcher object, so that it can be used in other parts of the zarrcurator viz., utils.  Args:         object[class Dispatcher]: Dispatcher object. Returns:         None.</p></li>
+<li><p>toFile(): Save the config object to a JSON file.  To save the zarrcurator configuration object, so that it can be edited and used.  Args:         str: File name for storing the config object in JSON format. Returns:         None.</p></li>
+<li><p>fromFile(): Read the config object from a JSON file.  To read the zarrcurator configuration object, so that it can be used in the current session.  Args:         str: File name for reading the config object in JSON format. Returns:         None.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="module-core">
+<h2>Module: core<a class="headerlink" href="#module-core" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/core.py</p>
+<p>No docstring provided.</p>
+<section id="id6">
+<h3>Functions<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="hello">
+<h4>hello()<a class="headerlink" href="#hello" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+<section id="hellofrom">
+<h4>helloFrom()<a class="headerlink" href="#hellofrom" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+</section>
+</section>
+<section id="module-diagnoser">
+<h2>Module: diagnoser<a class="headerlink" href="#module-diagnoser" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/diagnoser.py</p>
+<p>This module contains the declaration and definition of the class Diagnoser.</p>
+<section id="id7">
+<h3>Classes<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="diagnoser">
+<h4>Diagnoser<a class="headerlink" href="#diagnoser" title="Link to this heading"></a></h4>
+<p>Class to Diagonose the given experiment / zarr store / variable etc and
+gather the file sizes.</p>
+<section id="methods-of-diagnoser">
+<h5>Methods of Diagnoser<a class="headerlink" href="#methods-of-diagnoser" title="Link to this heading"></a></h5>
+<ul class="simple">
+<li><p>get_list_of_vars(): Get the variables in a given zarr store.  For getting the list of variables in a given zarr store, by recursively scanning the  zarr store directory.  Args:         path:Path to the given zarr store. Returns:         list: List of variables found in the given store.</p></li>
+<li><p>get_dir_size(): Get the appdataexplorer installation path.  For getting the location where the appdataexplorer is installed on the disk.  Args:         path: Path to appdataexplorer. Returns:         int,int: The cumulative size of the files and their count.</p></li>
+<li><p>findChunkSize(): Check the size of a single zarr chunk file.  Find the size of zarr chunk file and update the missing chunks list.  Args:         path: Path to zarr chunk. Returns:         None.</p></li>
+<li><p>findMissingChunksInZarr(): Diagnose a single zarr store to find zero size files i.e., missing chunks.  For diagnosing a single zarr store and identify the missing chunks.  Args:         path: Path to zarr store. Returns:         list:List of missing chunks.</p></li>
+<li><p>find_size(): Get the size of the file in the variable path.  For finding the size of the content in the variable under the path provided.  Args:         path: Path to appdataexplorer. Returns:         None.</p></li>
+<li><p>diagnose_var(): Diagnose a single variable in a zarr store.  For diagnosing a single variable in a zarr store.  Args:         str: Name of the variable.         path: Path to zarr store. Returns:         int,int,int:Cumulative size, count and time taken for diagnosis.</p></li>
+<li><p>expand_groups(): Replace the sub groups among the entries of a store by their own entries.  For stores with nested groups, e.g. written from an xarray DataTree, so that each array is diagnosed on its own and named by its path from the store root.  Args:         list: Entry paths (local store) or fsspec detail dicts (S3 store).         str: Path prefix of the entries relative to the store root, e.g. ‘z2/’. Returns:         list[tuple]: (entry, name) pairs, name being the path from the store root.</p></li>
+<li><p>diagnose_zarr_var(): Diagnose a single entry (variable or metadata file) of a zarr store.  Args:         var: Entry path (local store) or fsspec detail dict (S3 store).         zarr_path: Path to zarr store.         var_name: Name to report the entry by, e.g. its path ‘z2/ocean/sst’ in a store                 with nested groups; defaults to the entry’s own name. Returns:         tuple: (var_name, var_size, var_chunk_count, var_time).</p></li>
+<li><p>diagnose_zarr(): Diagnose a single zarr store.  For diagnosing a single zarr store. When ZARRCURATOR_MULTITHREAD=1, the variables of the store are diagnosed in parallel. Arrays in nested groups are recorded by their path from the store root, e.g. ‘z2/ocean/sst’, and each group’s metadata files likewise, e.g. ‘z2/.zgroup’.  Args:         path: Path to zarr store. Returns:         int:Time in secs for diagnosing.</p></li>
+<li><p>diagnose_experiment(): Diagnose the experiment.  For diagnosing all the zarr stores in parallel using multithreads.  Args:         None. Returns:         None.</p></li>
+<li><p>update(): To update the diagnoser object with the data obtained from the diagnosis of the input zarr stores.  The diagnoser object will be updated either by scanning each of the zarr stores in the input experiment path, if starting afresh or use the JSON file created from a previous diagnosis of the experiment.  Args:         None. Returns:         None.</p></li>
+<li><p>createStatistics(): Create statistics of the output from the entire experiment.  Generate some statistics like min, max file sizes, counts etc.  Args:         None. Returns:         None.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="module-dispatcher">
+<h2>Module: dispatcher<a class="headerlink" href="#module-dispatcher" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/dispatcher.py</p>
+<p>This module contains the declaration and definition of the class Dispatcher.</p>
+<section id="id8">
+<h3>Classes<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="dispatcher">
+<h4>Dispatcher<a class="headerlink" href="#dispatcher" title="Link to this heading"></a></h4>
+<p>Class to Dispatch the diagnoser output to create tar balls.</p>
+<section id="methods-of-dispatcher">
+<h5>Methods of Dispatcher<a class="headerlink" href="#methods-of-dispatcher" title="Link to this heading"></a></h5>
+<ul class="simple">
+<li><p>createTarForFrequencySubGroupDict(): Create the tar balls for all the zarr stores.  For creating tar balls for all the zarr stores in the experiment and listed in the ‘frequencySubgroupDict’ dictionary  created by the diagnoser.  Args:         None. Returns:         None.</p></li>
+<li><p>createTarForFrequencySubGroups(): Create the tar balls for all the zarr stores in a given frequency.  For creating tar balls for all the zarr stores in the experiment for a given  frequency listed in the ‘frequencySubgroupDict’ dictionary created by the diagnoser.  Args:         str: Frequency for which the tar balls are to be created. Returns:         None.</p></li>
+<li><p>createTarForFrequencyHealPixLevelSubGroup(): Create the tar balls for all the zarr stores in a given frequency and heal pix level.  For creating tar balls for all the zarr stores in the experiment for a given frequency and healpix level,  listed in the ‘frequencySubgroupDict’ dictionary created by the diagnoser.  Args:         str: Frequency for which the tar balls are to be created.         int:Healpix level for which the tar balls are to be created. Returns:         None.</p></li>
+<li><p>createTarForSubGroup(): Create the tar balls for a sub group.  For creating tar balls for a sub group based on the type and name them with a specific name.  Args:         object[Class Subgroup]: Sub group object.         str:Name of the tar ball that will be created for the subGroup. Returns:         None.</p></li>
+<li><p>createTarForZarr(): Create the tar balls for a sub group of type ‘zarr’.  For creating tar balls for ‘zarr’ type sub group based on the type and and name them with a specific name.  Args:         object[Class Subgroup]: Sub group object.         str:Name of the tar ball that will be created for the subGroup. Returns:         None.</p></li>
+<li><p>createTarForVar(): Create the tar balls for a sub group of type ‘var’.  For creating tar balls for ‘var’ type sub group based on the type and and name them with a specific name.  Args:         object[Class Subgroup]: Sub group object.         str:Name of the tar ball that will be created for the subGroup. Returns:         None.</p></li>
+<li><p>createTarForChunk(): Create the tar balls for a sub group of type ‘chunk’.  For creating tar balls for ‘chunk’ type sub group based on the type and and name them with a specific name.  Args:         object[Class Subgroup]: Sub group object.         str:Name of the tar ball that will be created for the subGroup. Returns:         None.</p></li>
+<li><p>executor(): Create the tar balls.  For creating tar balls for all the subgroups with their respective names.  Args:         int:Index of the subgroup for which the tar balls are to be created. Returns:         None.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="module-displayer">
+<h2>Module: displayer<a class="headerlink" href="#module-displayer" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/displayer.py</p>
+<p>This module contains the declaration and definition of the class Displayer.</p>
+<section id="id9">
+<h3>Classes<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="displayer">
+<h4>Displayer<a class="headerlink" href="#displayer" title="Link to this heading"></a></h4>
+<p>Class to create plots for the groups created using the distributorObj and diagnoserObj.</p>
+<section id="methods-of-displayer">
+<h5>Methods of Displayer<a class="headerlink" href="#methods-of-displayer" title="Link to this heading"></a></h5>
+<ul class="simple">
+<li><p>make_autopct(): No docstring provided.</p></li>
+<li><p>createPiePlotsForSubGroups(): Create Pie chart plots for the subgroups.  For creating pie chart plots for the subgroups based on the sub group distribution method.  Args:         None. Returns:         None.</p></li>
+<li><p>createHBarPlotsForExp(): Create horizontal bar plots for the subgroups.  For creating horizontal bar plots for the entire zarr stores in an experiment. The plots can be based on file count or file sizes.  Args:         bool:Flag to indicate if the count of the files is represented on the axis.         bool:Flag to indicate if the sizes of the files is represented on the axis. Returns:         None.</p></li>
+<li><p>createHBarPlotForStoreVariables(): Create horizontal bar plots for the sizes of the variables for a given zarr store.  For creating horizontal bar plots for the entire variables in a zarr store. The plots can be based on file count or file sizes.  Args:         bool:Flag to indicate if the count of the files is represented on the axis.         bool:Flag to indicate if the sizes of the files is represented on the axis. Returns:         None.</p></li>
+<li><p>createHBarPlotForStoreTarTapes(): Create horizontal bar plots for the sizes of the variables for a given zarr store.  For creating horizontal bar plots for the entire variables in a zarr store. The plots can be based on file count or file sizes.  Args:         bool:Flag to indicate if the count of the files is represented on the axis.         bool:Flag to indicate if the sizes of the files is represented on the axis. Returns:         None.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="module-distributor">
+<h2>Module: distributor<a class="headerlink" href="#module-distributor" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/distributor.py</p>
+<p>This module contains the declaration and definition of the class Distributor.</p>
+<section id="id10">
+<h3>Classes<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="distributor">
+<h4>Distributor<a class="headerlink" href="#distributor" title="Link to this heading"></a></h4>
+<p>Distribute the list of tuples of type (variable ,size) into different sub groups,
+either equal size or based on target size specified by user etc.</p>
+<section id="methods-of-distributor">
+<h5>Methods of Distributor<a class="headerlink" href="#methods-of-distributor" title="Link to this heading"></a></h5>
+<ul class="simple">
+<li><p>setFrequencySubGroupDict(): To set the frequency subGroup dictionary directly from JSON file.          To set frequencySubGroupDict directly, if  for example, loaded from JSON file from an earlier run of ‘zarrcurator’.  Args:         frequencySubGroupDict[dict]: Dictionary of the frequencies and subGroups.  Returns:         None.</p></li>
+<li><p>getFrequencySubGroupDict(): To get the frequency subGroup dictionary directly.          To get frequencySubGroupDict directly, if  for example, from utils of ‘zarrcurator’.  Args:         None.  Returns:         frequencySubGroupDict[dict]: Dictionary of the frequencies and subGroups.</p></li>
+<li><p>updateFrequencyGroupDict(): To create the dictionary per frequency and it’s groups.  For storing the file sizes and counts for each zarr store per frequency in a dictionary.  Args:         None. Returns:         None.</p></li>
+<li><p>updateFrequencySubGroupDictWithSingleZarrStore(): To update the sub group dictionary per frequency with single subgroup of type ‘zarr’.  For initializing each of the zarr stores (per freq and healpix) in the sub group dictionary with sub group of type ‘zarr’, if the size of the entire zarr store is less than the target size.  Args:         None. Returns:         None.</p></li>
+<li><p>updateFrequencySubGroupDictWithTargetSize(): To update the sub group dictionary per frequency with subgroups of size as per target size.  For updating each of the zarr stores (per freq and healpix) in the sub group dictionary with sub group whose size is greater than the target size and splitting the sub groups  into more subgroups if larger than the target size.   Args:         None. Returns:         None.</p></li>
+<li><p>groupStoreEntries(): To group the entries of a zarr store with nested groups into units that are kept together.  For stores with nested groups (e.g. written from an xarray DataTree), the entries are named by their path from the store root, e.g. ‘z2/ocean/sst’. A group whose entries in total fit the target size is kept together as one unit, a larger group is split into its own entries and its sub groups, which are handled the same way. Entries at the store root are units of their own, so for a store without nested groups every entry is a unit.  Args:         dict: Entry name -&gt; {‘size’, ‘count’} for the entries of a zarr store. Returns:         list[tuple]: (list of entry names, total size) per unit.</p></li>
+<li><p>split_zarr_into_equalSized_bins(): To update the sub group dictionary per frequency with subgroups of size as per target size.  For updating each of the zarr stores (per freq and healpix) in the sub group dictionary with sub group whose size meets the target size and splitting the sub groups into more  subgroups if larger than the target size.   Args:         obj:. Returns:         None.</p></li>
+<li><p>redistributeSubGroups(): To redistribute the subgroups.  For redistributing each of the zarr stores (per freq and healpix) in the sub group dictionary based on each of the sub group and it’s size in comparison with the target size,by splitting  the sub groups into more subgroups if their size is larger than the target size.   Args:         obj: None. Returns:         None.</p></li>
+<li><p>updateDimensionsToSubGroups(): To update the dimensions to the subgroups.  For each of the sub group dictionary based on it’s type, for the ‘var’ and ‘chunk’ types, the  dimensions of the original zarr store are to be appended, so that the tar ball is self-contained and could be utiized by the downstream applications.   Args:         obj: None. Returns:         None.</p></li>
+<li><p>getZarrstoreDimensions(): To get the coordinate variables of the zarr store.  For getting the coordinate variables of the original zarr store, which are to be appended to the tar balls. These are the dimension coordinates (arrays named after a dimension, e.g. ‘time’ or the HEALPix ‘cell’), the auxiliary coordinates listed in the ‘coordinates’ attribute and the variables named in the ‘grid_mapping’ attribute. Dimension names are read from ‘_ARRAY_DIMENSIONS’ (zarr v2) or ‘dimension_names’ (zarr v3).  For stores with nested groups (e.g. written from an xarray DataTree), the coordinates used by the arrays of each of the given groups are collected. As a group can use the coordinates of its parent groups, each coordinate is looked up in the group itself first and then in its parents up to the store root.   Args:         str: Frequency of the model data.          str: Path to the location of the zarr store.         list[str]: Group paths relative to the store root, e.g. [‘z2/ocean’]; defaults to the root group ‘’. Returns:         list: sorted list of (coordinate variable path, size) tuples.</p></li>
+<li><p>update(): To update the distributor object with the data obtained from the distribution of the input zarr stores.  The distributor object will be updated either by scanning each of the zarr stores in the input experiment path, if starting afresh or use the JSON file created from a previous distribution of the experiment.  Args:         None. Returns:         None.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="module-oceanvarsyaml">
+<h2>Module: oceanVarsYAML<a class="headerlink" href="#module-oceanvarsyaml" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/oceanVarsYAML.py</p>
+<p>No docstring provided.</p>
+</section>
+<section id="module-storetree">
+<h2>Module: storetree<a class="headerlink" href="#module-storetree" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/storetree.py</p>
+<p>This module contains helpers for walking the group hierarchy of a zarr store,
+e.g. a store written from an xarray DataTree, with nested groups.</p>
+<section id="id11">
+<h3>Functions<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<section id="iszarrgroupdir">
+<h4>isZarrGroupDir()<a class="headerlink" href="#iszarrgroupdir" title="Link to this heading"></a></h4>
+<p>Check whether a directory is a zarr group.</p>
+<p>A zarr v2 group holds a ‘.zgroup’ file, a zarr v3 group a ‘zarr.json’ file
+with node_type ‘group’. Array directories and plain directories are not groups.</p>
+<p>Args:
+path[str]: Path of the directory.
+fs[object]: fsspec file system object for object stores, None for local stores.
+Returns:
+bool: True if the directory is a zarr group.</p>
+</section>
+<section id="listarraypaths">
+<h4>listArrayPaths()<a class="headerlink" href="#listarraypaths" title="Link to this heading"></a></h4>
+<p>List the paths of all arrays in a zarr group and its sub groups.</p>
+<p>Works for zarr v2 and v3 groups, with or without consolidated metadata.</p>
+<p>Args:
+group[zarr.Group]: Opened zarr group, usually the root of the store.
+Returns:
+list[str]: Sorted array paths relative to the group, e.g. [‘time’, ‘z2/ocean/sst’].</p>
+</section>
+<section id="groupancestors">
+<h4>groupAncestors()<a class="headerlink" href="#groupancestors" title="Link to this heading"></a></h4>
+<p>List the groups enclosing a store member, from the root down.</p>
+<p>Args:
+path[str]: Path of the member relative to the store root, e.g. ‘z2/ocean/sst’.
+Returns:
+list[str]: Group paths relative to the store root, ‘’ being the root,
+e.g. [‘’, ‘z2’, ‘z2/ocean’].</p>
+</section>
+</section>
+</section>
+<section id="module-subgroup">
+<h2>Module: subgroup<a class="headerlink" href="#module-subgroup" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/subgroup.py</p>
+<p>This module contains the declaration and definition of the class SubGroup.</p>
+<section id="id12">
+<h3>Functions<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="subgroup-to-dict">
+<h4>subGroup_to_dict()<a class="headerlink" href="#subgroup-to-dict" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+<section id="subgroup-from-dict">
+<h4>subGroup_from_dict()<a class="headerlink" href="#subgroup-from-dict" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+</section>
+<section id="id13">
+<h3>Classes<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="subgroup">
+<h4>SubGroup<a class="headerlink" href="#subgroup" title="Link to this heading"></a></h4>
+<p>Class to create subGroups of type ‘zarr’, ‘var’ or ‘chunk’ based on the size of the zarr store.</p>
+<section id="methods-of-subgroup">
+<h5>Methods of SubGroup<a class="headerlink" href="#methods-of-subgroup" title="Link to this heading"></a></h5>
+<ul class="simple">
+<li><p>groupSize(): To get the group size of the subGroup.  To get the type of the subGroup.  Args:         None. Returns:         int: Size of the subGroup.</p></li>
+<li><p>groupSize(): To compute the size of the subGroup.  To compute the size of the subGroup by adding up the subGroup members.  Args:         int: To set the groupsize to the variable. Returns:         None.</p></li>
+<li><p>setGroupType(): To set the type of the subGroup.  To set the type of the subGroup.  Args:         str: Type of the subGroup ‘zarr’, ‘var’ or ‘chunk’. Returns:         None.</p></li>
+<li><p>getGroupType(): To get the type of the subGroup.  To get the type of the subGroup.  Args:         None. Returns:         str: Type of the subGroup ‘zarr’, ‘var’ or ‘chunk’.</p></li>
+<li><p>setGroupTarMembers(): To set the tar file names for the subGroup.  To set the list of tar file names for the tarballs produced for the subGroup.  Args:         list[str]: List of tar file names. Returns:         None.</p></li>
+<li><p>getTarMembers(): To get the tar file names for the subGroup.  To get the list of tar file names for the tarballs produced for the subGroup.  Args:         None. Returns:         list[str]: List of tar file names.</p></li>
+<li><p>setgroupTarTapeIDs(): To set the tape IDs for the tar file names for the subGroup.  To set the list of tape IDs for the tar file names for the tarballs produced for the subGroup.  Args:         list[str]: List of tape IDS for tar file names. Returns:         None.</p></li>
+<li><p>getTarTapeIDs(): To get the tape IDs for the tar file names for the subGroup.  To get the list of tape IDs for the tar file names for the tarballs produced for the subGroup.  Args:         None. Returns:         list[str]: List of tape IDs for tar file names.</p></li>
+<li><p>updateSubGroup(): To update the subGroup object with diagnoser object with the data obtained from the diagnosis of the input zarr stores.  The diagnoser object will be updated either by scanning each of the zarr stores in the input experiment path, if starting afresh or use the JSON file created from a previous diagnosis of the experiment.  Args:         list[tuple] or tuple: Tuple or list of tuples to update the SubGroup object. Returns:         None.</p></li>
+<li><p>updateSubGroupSize(): To update the subGroup size.  To update the subgroup size by adding up the sizes of the subGroup members.  Args:         None. Returns:         None.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="module-synthetic-store">
+<h2>Module: synthetic_store<a class="headerlink" href="#module-synthetic-store" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/synthetic_store.py</p>
+<p>Synthetic Zarr experiment generator for zarrcurator.</p>
+<p>This module creates local Zarr stores with predictable naming and metadata so
+core zarrcurator workflows can be tested end-to-end.</p>
+<p>Examples:
+python -m zarrcurator.synthetic_store –output-dir tests/data/synthetic_experiment
+python -m zarrcurator.synthetic_store –output-dir tests/data/synthetic_experiment –run-smoke
+python -m zarrcurator.synthetic_store –output-dir /tmp/layouts –separators .,/
+python -m zarrcurator.synthetic_store –output-dir /tmp/all –separators .,/ –shards 4,4,8 –layouts flat,tree</p>
+<section id="id14">
+<h3>Functions<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="store-variant-tag">
+<h4>store_variant_tag()<a class="headerlink" href="#store-variant-tag" title="Link to this heading"></a></h4>
+<p>Return the tag of a store variant in store names, e.g. ‘z2’, ‘z2slash’, ‘z3shard’, ‘z3dotshardtree’.</p>
+<p>Only what differs from the default (format default separator, no sharding, flat) is added.
+The tag has no ‘<em>’, as store names are split on ‘</em>’ by the dispatcher.</p>
+</section>
+<section id="create-synthetic-experiment">
+<h4>create_synthetic_experiment()<a class="headerlink" href="#create-synthetic-experiment" title="Link to this heading"></a></h4>
+<p>Create an experiment directory containing multiple synthetic stores.</p>
+<p>One set of stores is created per combination of zarr format, entry in <code class="docutils literal notranslate"><span class="pre">separators</span></code>
+(None: only the format default), sharding and entry in <code class="docutils literal notranslate"><span class="pre">layouts</span></code> (None: only ‘flat’).
+With <code class="docutils literal notranslate"><span class="pre">shards</span></code>, the zarr v3 stores are created both without and with sharding of the data
+variables. The variant is tagged in the store name, see store_variant_tag(), e.g.
+<code class="docutils literal notranslate"><span class="pre">syntheticexp_P1D_000_z2slash.zarr</span></code> or <code class="docutils literal notranslate"><span class="pre">syntheticexp_P1D_000_z3shardtree.zarr</span></code>.</p>
+</section>
+<section id="run-smoke-pipeline">
+<h4>run_smoke_pipeline()<a class="headerlink" href="#run-smoke-pipeline" title="Link to this heading"></a></h4>
+<p>Run diagnose/distribute/dispatch on the generated synthetic experiment.</p>
+</section>
+<section id="id15">
+<h4>parse_args()<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+<section id="id16">
+<h4>main()<a class="headerlink" href="#id16" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+</section>
+</section>
+<section id="module-utils">
+<h2>Module: utils<a class="headerlink" href="#module-utils" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/utils.py</p>
+<p>This module contains certain utility functions that will be exposed to the user to perform various tasks.</p>
+<section id="id17">
+<h3>Functions<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<section id="usage">
+<h4>usage()<a class="headerlink" href="#usage" title="Link to this heading"></a></h4>
+<p>Help about the usage of zarrcurator.
+Returns:
+None.</p>
+</section>
+<section id="saveconfigtofile">
+<h4>saveConfigToFile()<a class="headerlink" href="#saveconfigtofile" title="Link to this heading"></a></h4>
+<p>Saving the zarrcurator config to file.</p>
+<p>Saving the zarrcurator library configuration as a JSON file.</p>
+<p>Args:
+configFileName    : File name in which to store the configuration.
+Returns:
+None.</p>
+</section>
+<section id="loadconfigfromfile">
+<h4>loadConfigFromFile()<a class="headerlink" href="#loadconfigfromfile" title="Link to this heading"></a></h4>
+<p>Loading the zarrcurator config from file.</p>
+<p>Reading the zarrcurator library configuration from a JSON file.</p>
+<p>Args:
+configFileName    : File name in which to store the configuration.
+Returns:
+None.</p>
+</section>
+<section id="setobjectstorecredentials">
+<h4>setObjectStoreCredentials()<a class="headerlink" href="#setobjectstorecredentials" title="Link to this heading"></a></h4>
+<p>Set object-store credentials for the current process.</p>
+<p>Accepts either raw key values or environment variable names that contain
+those values. Resolved values are exported to AWS/S3 standard environment
+variables and wired into configObj for downstream filesystem creation.</p>
+<p>Args:
+accessKey[str]: Access key value or env-var name containing it.
+secretKey[str]: Secret key value or env-var name containing it.
+Returns:
+None.</p>
+</section>
+<section id="updatestoretoconfig">
+<h4>updateStoretoConfig()<a class="headerlink" href="#updatestoretoconfig" title="Link to this heading"></a></h4>
+<p>Update the store location to the config object.</p>
+<p>To update the store location to the config object, to be used by other functions in the zarrcurator library.</p>
+<p>Args:
+storeLocation[str]: Location of the zarr store.
+accessKey[str]: Optional access key value/env-var name.
+secretKey[str]: Optional secret key value/env-var name.
+Returns:
+None.</p>
+</section>
+<section id="findmissingchunksinstore">
+<h4>findMissingChunksInStore()<a class="headerlink" href="#findmissingchunksinstore" title="Link to this heading"></a></h4>
+<p>Finding missing chunks in a zarr store.</p>
+<p>To find chunks in store that are missing, artifacts, corrupt or zero sized.
+All arrays are checked, including those in nested groups (e.g. a store
+written from an xarray DataTree).
+When ZARRCURATOR_MULTITHREAD=1, chunk size queries and the chunk
+readability (corruption) check run in parallel threads.</p>
+<p>Args:
+storePath    : Path of the zarr store.
+accessKey[str]: Optional access key value/env-var name.
+secretKey[str]: Optional secret key value/env-var name.
+Returns:
+None.</p>
+</section>
+<section id="initialize">
+<h4>initialize()<a class="headerlink" href="#initialize" title="Link to this heading"></a></h4>
+<p>Initializing the zarrcurator.</p>
+<p>Initialize the zarrcurator library configuration with the paths, flags etc.</p>
+<p>Args:
+expPath    : Directory under which the simulation data (zarr stores) exists.
+workDir    : Working directory where the output will be stored.
+jsonFile   : Name of the JSON file in which the output of the zarrcurator will be stored.
+targetSize : Target size of the tarball keeping in view of the HSM constraint (200 GB as of now).
+batchMode  : Flag to indicate if mode of operation of the zarrcurator is batch mode.
+debugMode  : Flag to indicate if mode of operation of the zarrcurator is set to debugging.
+packDiscontinuousData : Flag to indicate if data with missing chunks are to be packed.
+accessKey[str]: Optional access key value/env-var name.
+secretKey[str]: Optional secret key value/env-var name.</p>
+<p>Returns:
+None.</p>
+</section>
+<section id="diagnose">
+<h4>diagnose()<a class="headerlink" href="#diagnose" title="Link to this heading"></a></h4>
+<p>Perform the diagnosis of the input directory containing the various zarr stores.</p>
+<p>Creates the object of class Diagnoser, to explore the contents of each zarr store and gather the count, sizes
+of the files inside them.</p>
+<p>Args:
+None.<br />
+Returns:
+None.</p>
+</section>
+<section id="diagnosestore">
+<h4>diagnoseStore()<a class="headerlink" href="#diagnosestore" title="Link to this heading"></a></h4>
+<p>Perform the diagnosis of the input zarr store.</p>
+<p>To find the sizes, number of chunks for each of the variables inside the store.</p>
+<p>Args:
+storeLocation[str]: Location of the zarr store.
+accessKey[str]: Optional access key value/env-var name.
+secretKey[str]: Optional secret key value/env-var name.
+Returns:
+None.</p>
+</section>
+<section id="display">
+<h4>display()<a class="headerlink" href="#display" title="Link to this heading"></a></h4>
+<p>Displays the output of the diagnoser object, by creating various plots.</p>
+<p>Creates the object of class Displayer, to create bar plots, pie charts of the output generated by the diagnoser object viz.,
+count, sizes of the files for each of the input zarr store, the constraints of the HSM system.</p>
+<p>Args:
+None.<br />
+Returns:
+None.</p>
+</section>
+<section id="running-in-jupyter">
+<h4>running_in_jupyter()<a class="headerlink" href="#running-in-jupyter" title="Link to this heading"></a></h4>
+<p>No docstring provided.</p>
+</section>
+<section id="displaystoresunburst">
+<h4>displayStoreSunburst()<a class="headerlink" href="#displaystoresunburst" title="Link to this heading"></a></h4>
+<p>Displays the output of the diagnoser object, by creating sunburst plot for the input zarr store.</p>
+<p>Creates the object of class Displayer, to create sunburst plot of the output generated by the diagnoser object viz.,
+count, sizes of the files for each of the variables in the input zarr store.</p>
+<p>Args:
+storeLocation[str]: Location of the zarr store.
+accessKey[str]: Optional access key value/env-var name.
+secretKey[str]: Optional secret key value/env-var name.
+Returns:
+None.</p>
+</section>
+<section id="displayzarrstorevariables">
+<h4>displayZarrStoreVariables()<a class="headerlink" href="#displayzarrstorevariables" title="Link to this heading"></a></h4>
+<p>Displays the output of a given zarr store from the diagnoser object , by creating variable sizes plot.</p>
+<p>Creates create bar plots of the input zarr store from output generated by the diagnoser object viz.,
+count, sizes of the files for each of the variable in the input zarr store.</p>
+<p>Args:
+zarrStore[str]: Name of the zarr store.
+fileCount[int]: Flag to indicate if file counts are to be plotted.
+byteBins[int]: Flag to indicate if file sizes are to be plotted.
+Returns:
+None.</p>
+</section>
+<section id="distribute">
+<h4>distribute()<a class="headerlink" href="#distribute" title="Link to this heading"></a></h4>
+<p>Distribute the output of the diagnoser object into subgroups of ‘zarr’, ‘var’ and ‘chunk’.</p>
+<p>Creates the object of class Distributor, to create subgroups of ‘zarr’, ‘var’ and ‘chunk’, based on the size of the
+contents of the zarr store and the constraints of the HSM system.</p>
+<p>Args:
+None.<br />
+Returns:
+None.</p>
+</section>
+<section id="distributestoretosubstores">
+<h4>distributeStoreToSubStores()<a class="headerlink" href="#distributestoretosubstores" title="Link to this heading"></a></h4>
+<p>Distribute the output of the diagnoser object into subgroups.</p>
+<p>Creates the object of class Distributor, to create subgroups of ‘zarr’, ‘var’ and ‘chunk’, based on the size of the
+contents of the zarr store and the constraints of the HSM system.</p>
+</section>
+<section id="checkstoreopenswithxarray">
+<h4>checkStoreOpensWithXarray()<a class="headerlink" href="#checkstoreopenswithxarray" title="Link to this heading"></a></h4>
+<p>Check that a zarr store can be opened with xarray, with all its groups.</p>
+<p>The tarballs are read back with xarray, directly or through the Kerchunk references, which
+needs the dimension names of the arrays (‘_ARRAY_DIMENSIONS’ in zarr v2, ‘dimension_names’
+in zarr v3). Stores written with plain zarr may lack them.</p>
+<p>Args:
+storeTarget: Path of a local zarr store, or zarr store object of an object store.
+storeLocation[str]: Location of the zarr store, for the error message.
+Returns:
+None.
+Raises:
+ValueError: If xarray cannot open the store.</p>
+</section>
+<section id="dispatchstoretotarstores">
+<h4>dispatchStoreToTarStores()<a class="headerlink" href="#dispatchstoretotarstores" title="Link to this heading"></a></h4>
+<p>Dispatch the output of the distributor object into tarballs.</p>
+<p>Creates the object of class Dispatcher, to create tarballs for each of the subgroups of ‘zarr’, ‘var’ and ‘chunk’.
+Fails with a ValueError before diagnosing, distributing or creating tarballs if the store cannot be
+opened with xarray, see checkStoreOpensWithXarray().</p>
+</section>
+<section id="dispatch">
+<h4>dispatch()<a class="headerlink" href="#dispatch" title="Link to this heading"></a></h4>
+<p>Dispatch the output of the distributor object into tarballs.</p>
+<p>Creates the object of class Dispatcher, to create tarballs for each of the subgroups of ‘zarr’, ‘var’ and ‘chunk’.</p>
+<p>Args:
+freq[str]: Frequency of the model output.<br />
+zoomlevel[int]: Heal pix level.
+int:Index of the subgroup for which the tar balls are to be created.
+Returns:
+None.</p>
+</section>
+<section id="createkerchunkreferencefilefortar">
+<h4>createKerchunkReferenceFileForTar()<a class="headerlink" href="#createkerchunkreferencefilefortar" title="Link to this heading"></a></h4>
+<p>Create kerchunk reference file for given tar file.</p>
+<p>To generate the kerchunk reference file in JSON format for the contents of the input tar archive.</p>
+<p>Args:
+tarFileName[str]: Path of the tar archive.
+Returns:
+None.</p>
+</section>
+<section id="mergekerchunkreferences">
+<h4>mergeKerchunkReferences()<a class="headerlink" href="#mergekerchunkreferences" title="Link to this heading"></a></h4>
+<p>Merge the Kerchunk references of the tarballs of a zarr store into the references of the store.</p>
+<p>The tarballs of a zarr store are parts of it: each holds some of its variables, or some of the
+chunks of a variable, along with the metadata of the store, its groups and its arrays and the
+coordinate variables it needs. So the references of the store are the union of the references
+of its tarballs. A chunk of a data variable is in one tarball; metadata and the chunks of
+coordinate variables are in several, and are kept once after checking that their content is the
+same. The consolidated metadata (‘.zmetadata’) is left out, as the parquet references hold their own.</p>
+<p>Args:
+jsonFiles[list[str]]: Paths of the Kerchunk reference files (JSON) of the tarballs.
+Returns:
+dict: Merged references, key -&gt; metadata content or [url, offset, size].
+Raises:
+ValueError: If a key is found in two tarballs with a different content or location.</p>
+</section>
+<section id="convertkerchunkreferencefilesofzarrstoretoparquet">
+<h4>convertKerchunkReferenceFilesOfZarrStoreToParquet()<a class="headerlink" href="#convertkerchunkreferencefilesofzarrstoretoparquet" title="Link to this heading"></a></h4>
+<p>Convert given Kerchunk reference file to parquet file.</p>
+<p>To generate the Kerchunk reference file in JSON format for the contents of the input tar archive.
+The references of all tarballs of the store are merged, see mergeKerchunkReferences().
+The references are combined in the zarr v2 layout: for zarr v3 stores the zarr.json metadata is
+translated to zarr v2 metadata and the chunks are referenced unchanged, so only zarr v3 arrays
+with a zarr v2 equivalent are supported; sharded arrays are referenced by their inner chunks,
+read from the shard indexes. Stores with nested groups (e.g. written
+from an xarray DataTree) are opened from the parquet references with consolidated=True.</p>
+<p>Args:
+tarFile[str]: Path of the tar archive.
+Returns:
+None.</p>
+</section>
+<section id="updatearchbasepath">
+<h4>updateArchBasePath()<a class="headerlink" href="#updatearchbasepath" title="Link to this heading"></a></h4>
+<p>Update the base path of the tape archive.</p>
+<p>To set the base path on the tape archive under which the tarballs created for each of the subgroups of ‘zarr’, ‘var’ and ‘chunk’ are stored.</p>
+<p>Args:
+archBasePath[str]: Path on the tape archive.<br />
+Returns:
+None.</p>
+</section>
+<section id="updatetartotapemapper">
+<h4>updateTarToTapeMapper()<a class="headerlink" href="#updatetartotapemapper" title="Link to this heading"></a></h4>
+<p>Update the mapper for tarfiles and tape IDs.</p>
+<p>To update the mapper which maps the input tar file to the ID of the tape on which this tar file resides.</p>
+<p>Args:
+tarFile[str]: Path on the tar file.<br />
+Returns:
+None.</p>
+</section>
+<section id="maptapeidstofrequencysubgroupdict">
+<h4>mapTapeIDsToFrequencySubGroupDict()<a class="headerlink" href="#maptapeidstofrequencysubgroupdict" title="Link to this heading"></a></h4>
+<p>Update the tape IDs to the FrequencySubGroupDict.</p>
+<p>Creates the list of tape IDs for the tarballs of each subgroup in the FrequencySubGroupDict. To be called after the tarballs
+are transferred to the HSM tapes.</p>
+<p>Args:
+None
+Returns:
+None.</p>
+</section>
+<section id="displayzarrstorestartapes">
+<h4>displayZarrStoresTarTapes()<a class="headerlink" href="#displayzarrstorestartapes" title="Link to this heading"></a></h4>
+<p>Displays the tar ball count and tape count for the zarr stores.</p>
+<p>Creates create bar plots for the tar balls and tape counts for all the zarr stores.</p>
+<p>Args:
+None.
+Returns:
+None.</p>
+</section>
+<section id="displayzarrstorevartartapes">
+<h4>displayZarrStoreVarTarTapes()<a class="headerlink" href="#displayzarrstorevartartapes" title="Link to this heading"></a></h4>
+<p>Displays the tar ball count and tape count for a given variable of a zarr store.</p>
+<p>Creates create bar plots for the tar balls and tape counts for a particular variable from a zarr store.</p>
+<p>Args:
+zarrStoreInput[str]: Name on the zarr store.
+varInput[list(str)]: List of names of the variables.
+Returns:
+None.</p>
+</section>
+</section>
+</section>
+<section id="module-zarrmetadata">
+<h2>Module: zarrmetadata<a class="headerlink" href="#module-zarrmetadata" title="Link to this heading"></a></h2>
+<p>Source: src/zarrcurator/zarrmetadata.py</p>
+<p>This module contains helpers for translating zarr v3 metadata (zarr.json) to zarr v2
+metadata (.zgroup, .zarray, .zattrs), so that the chunks of zarr v3 stores can be
+referenced by Kerchunk, which combines references in the zarr v2 layout.</p>
+<p>The chunk bytes are referenced unchanged, so only codecs with a zarr v2 equivalent are
+supported: the ‘bytes’ codec followed by at most one compressor. ‘transpose’ and chained
+compressors raise a ValueError.</p>
+<p>Sharded arrays (‘sharding_indexed’ codec) are translated to zarr v2 arrays of their inner
+chunks: each shard ends (or starts) with an index of the offset and size of its inner
+chunks, which is read to reference each inner chunk as a byte range within the shard.
+The inner codecs follow the rules above; nested sharding raises a ValueError.</p>
+<section id="id18">
+<h3>Functions<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<section id="v3codecstov2">
+<h4>v3CodecsToV2()<a class="headerlink" href="#v3codecstov2" title="Link to this heading"></a></h4>
+<p>Translate the codecs of a zarr v3 array to a zarr v2 compressor.</p>
+<p>Args:
+list[dict]: The ‘codecs’ of the zarr v3 array metadata.
+Returns:
+tuple: (endian, compressor), endian being ‘little’ or ‘big’ and compressor
+the zarr v2 compressor configuration or None.</p>
+</section>
+<section id="v3metadatatov2">
+<h4>v3MetadataToV2()<a class="headerlink" href="#v3metadatatov2" title="Link to this heading"></a></h4>
+<p>Translate the zarr v3 metadata of a group or array to zarr v2 metadata files.</p>
+<p>The dimension names become the ‘_ARRAY_DIMENSIONS’ attribute. xarray keeps the fill value
+in the ‘_FillValue’ attribute of zarr v3 arrays, in zarr v2 it is the array’s fill_value,
+which xarray reads as ‘_FillValue’. So an array without ‘_FillValue’ and a zero fill value
+gets no fill value; zarr v2 reads missing chunks (not written as they hold only the fill
+value) as zeros then as well. A non-zero fill value is kept so missing chunks read correctly,
+though xarray then masks it.</p>
+<p>Args:
+dict: Content of a zarr v3 ‘zarr.json’ file.
+Returns:
+dict: zarr v2 file name (‘.zgroup’, ‘.zarray’, ‘.zattrs’) -&gt; content.</p>
+</section>
+<section id="v3shardinglayout">
+<h4>v3ShardingLayout()<a class="headerlink" href="#v3shardinglayout" title="Link to this heading"></a></h4>
+<p>Get the layout of the shards of a sharded zarr v3 array.</p>
+<p>Args:
+dict: Content of the zarr v3 ‘zarr.json’ file of an array.
+Returns:
+dict or None: None for an array without sharding, else ‘shape’ (of the array),
+‘shard_shape’, ‘chunk_shape’ (of the inner chunks), ‘codecs’ (of the inner chunks),
+‘index_location’ (‘start’ or ‘end’), ‘index_endian’, ‘index_checksum’ (bool) and
+‘index_size’ (bytes).</p>
+</section>
+<section id="shardchunkreferences">
+<h4>shardChunkReferences()<a class="headerlink" href="#shardchunkreferences" title="Link to this heading"></a></h4>
+<p>Get the references of the inner chunks of a shard.</p>
+<p>Args:
+list: Reference of the shard, [url, offset, size].
+str: Dot-separated zarr v2 key of the shard, relative to the array, e.g. ‘1.0’.
+dict: Layout of the shards, see v3ShardingLayout().
+callable: read_range(url, start, end) returning the bytes in [start, end) of url.
+Returns:
+list[tuple]: (dot-separated key of the inner chunk relative to the array, [url, offset, size])
+for every inner chunk in the shard that is written and lies within the array.
+Raises:
+ValueError: If the checksum of the shard index does not match.</p>
+</section>
+<section id="v3chunkkeytov2">
+<h4>v3ChunkKeyToV2()<a class="headerlink" href="#v3chunkkeytov2" title="Link to this heading"></a></h4>
+<p>Translate a chunk key of a zarr v3 array, relative to the array, to the dot-separated zarr v2 form.</p>
+<p>Args:
+str: Chunk key, e.g. ‘c/0/1’ or ‘c.0.1’ (‘default’ encoding) or ‘0/1’ (‘v2’ encoding).
+dict: The ‘chunk_key_encoding’ of the zarr v3 array metadata.
+Returns:
+str: zarr v2 chunk key, e.g. ‘0.1’.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="known_issues.html" class="btn btn-neutral float-left" title="Known Issues and Limitations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Kameswarrao Modali.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

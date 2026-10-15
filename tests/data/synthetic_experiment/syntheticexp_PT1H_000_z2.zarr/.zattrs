@@ -1,0 +1,7 @@
+{
+  "frequency": "PT1H",
+  "zoom": 1,
+  "generator": "zarrcurator.synthetic_store",
+  "synthetic": true,
+  "zarr_format": 2
+}

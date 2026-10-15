@@ -1,0 +1,639 @@
+{
+  "experiment": "syntheticexp",
+  "root": ".",
+  "work_dir": "work",
+  "stores": [
+    {
+      "store": "syntheticexp_P1D_000_z2.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 100,
+      "zarr_format": 2,
+      "separator": ".",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z2.zarr/temp/0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z2.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z2.zarr/temp/0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z2.zarr/temp/0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z2.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 101,
+      "zarr_format": 2,
+      "separator": ".",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z2.zarr/temp/0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z2.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z2.zarr/temp/0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z2.zarr/temp/0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z2tree.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 102,
+      "zarr_format": 2,
+      "separator": ".",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z2tree.zarr/atmos/ocean/salinity/0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z2tree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z2tree.zarr/atmos/ocean/salinity/0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z2tree.zarr/atmos/ocean/salinity/0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z2tree.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 103,
+      "zarr_format": 2,
+      "separator": ".",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z2tree.zarr/atmos/ocean/salinity/0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z2tree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z2tree.zarr/atmos/ocean/salinity/0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z2tree.zarr/atmos/ocean/salinity/0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z2slash.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 104,
+      "zarr_format": 2,
+      "separator": "/",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z2slash.zarr/temp/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z2slash.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z2slash.zarr/temp/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z2slash.zarr/temp/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z2slash.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 105,
+      "zarr_format": 2,
+      "separator": "/",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z2slash.zarr/temp/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z2slash.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z2slash.zarr/temp/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z2slash.zarr/temp/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z2slashtree.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 106,
+      "zarr_format": 2,
+      "separator": "/",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z2slashtree.zarr/atmos/ocean/salinity/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z2slashtree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z2slashtree.zarr/atmos/ocean/salinity/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z2slashtree.zarr/atmos/ocean/salinity/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z2slashtree.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 107,
+      "zarr_format": 2,
+      "separator": "/",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z2slashtree.zarr/atmos/ocean/salinity/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z2slashtree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z2slashtree.zarr/atmos/ocean/salinity/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z2slashtree.zarr/atmos/ocean/salinity/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3dot.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 108,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3dot.zarr/temp/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3dot.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3dot.zarr/temp/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3dot.zarr/temp/c.0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3dot.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 109,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3dot.zarr/temp/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3dot.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3dot.zarr/temp/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3dot.zarr/temp/c.0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3dottree.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 110,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3dottree.zarr/atmos/ocean/salinity/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3dottree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3dottree.zarr/atmos/ocean/salinity/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3dottree.zarr/atmos/ocean/salinity/c.0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3dottree.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 111,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3dottree.zarr/atmos/ocean/salinity/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3dottree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3dottree.zarr/atmos/ocean/salinity/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3dottree.zarr/atmos/ocean/salinity/c.0.0.2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3dotshard.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 112,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3dotshard.zarr/temp/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3dotshard.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3dotshard.zarr/temp/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3dotshard.zarr/temp/c.0.1.0"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3dotshard.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 113,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3dotshard.zarr/temp/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3dotshard.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3dotshard.zarr/temp/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3dotshard.zarr/temp/c.0.1.0"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3dotshardtree.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 114,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3dotshardtree.zarr/atmos/ocean/salinity/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3dotshardtree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3dotshardtree.zarr/atmos/ocean/salinity/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3dotshardtree.zarr/atmos/ocean/salinity/c.0.1.0"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3dotshardtree.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 115,
+      "zarr_format": 3,
+      "separator": ".",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3dotshardtree.zarr/atmos/ocean/salinity/c.0.0.0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3dotshardtree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3dotshardtree.zarr/atmos/ocean/salinity/c.0.0.1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3dotshardtree.zarr/atmos/ocean/salinity/c.0.1.0"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 116,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3.zarr/temp/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3.zarr/temp/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3.zarr/temp/c/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 117,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": null,
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3.zarr/temp/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3.zarr/temp/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3.zarr/temp/c/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3tree.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 118,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3tree.zarr/atmos/ocean/salinity/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3tree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3tree.zarr/atmos/ocean/salinity/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3tree.zarr/atmos/ocean/salinity/c/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3tree.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 119,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": null,
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3tree.zarr/atmos/ocean/salinity/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3tree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3tree.zarr/atmos/ocean/salinity/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3tree.zarr/atmos/ocean/salinity/c/0/0/2"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3shard.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 120,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3shard.zarr/temp/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3shard.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3shard.zarr/temp/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3shard.zarr/temp/c/0/1/0"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3shard.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 121,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "flat",
+      "anomaly_array": "temp",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3shard.zarr/temp/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3shard.zarr/temp/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3shard.zarr/temp/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3shard.zarr/temp/c/0/1/0"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_P1D_000_z3shardtree.zarr",
+      "frequency": "P1D",
+      "zoom": 1,
+      "seed": 122,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_P1D_000_z3shardtree.zarr/atmos/ocean/salinity/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_P1D_000_z3shardtree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_P1D_000_z3shardtree.zarr/atmos/ocean/salinity/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_P1D_000_z3shardtree.zarr/atmos/ocean/salinity/c/0/1/0"
+        ]
+      }
+    },
+    {
+      "store": "syntheticexp_PT1H_000_z3shardtree.zarr",
+      "frequency": "PT1H",
+      "zoom": 1,
+      "seed": 123,
+      "zarr_format": 3,
+      "separator": "/",
+      "shards": [
+        4,
+        4,
+        8
+      ],
+      "layout": "tree",
+      "anomaly_array": "atmos/ocean/salinity",
+      "anomalies": {
+        "zero_size": [
+          "syntheticexp_PT1H_000_z3shardtree.zarr/atmos/ocean/salinity/c/0/0/0"
+        ],
+        "unexpected": [
+          "syntheticexp_PT1H_000_z3shardtree.zarr/atmos/ocean/salinity/artifact.bad"
+        ],
+        "missing": [
+          "syntheticexp_PT1H_000_z3shardtree.zarr/atmos/ocean/salinity/c/0/0/1"
+        ],
+        "corrupt": [
+          "syntheticexp_PT1H_000_z3shardtree.zarr/atmos/ocean/salinity/c/0/1/0"
+        ]
+      }
+    }
+  ]
+}
